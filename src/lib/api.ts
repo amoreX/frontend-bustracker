@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_BASE = "http://localhost:3000";
+export const API_BASE = "https://bus-tracker-assignment.onrender.com";
 
 export const fetchTrips = async () => {
   const response = await axios.get(`${API_BASE}/trips`);
