@@ -61,7 +61,11 @@ export default function TripList({ onSelectTrip }: TripListProps) {
 
         {loading ? (
           <div className="flex justify-center items-center h-40">
-            <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
+            <div className="flex flex-col items-center justify-center text-center">
+              <span className="mb-2">pinging render server to start</span>
+              <span className="mb-2">please hold on est. 30sec</span>
+              <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
+            </div>
           </div>
         ) : trips.length === 0 ? (
           <div className="text-center py-10 text-gray-500">
@@ -72,11 +76,7 @@ export default function TripList({ onSelectTrip }: TripListProps) {
         ) : (
           <div className="space-y-3">
             {trips.map((trip) => (
-              <TripCard
-                key={trip.id}
-                trip={trip}
-                onSelectTrip={onSelectTrip}
-              />
+              <TripCard key={trip.id} trip={trip} onSelectTrip={onSelectTrip} />
             ))}
           </div>
         )}
