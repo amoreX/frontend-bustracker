@@ -109,6 +109,7 @@ export default function TripDetail({ trip, onBack }: TripDetailProps) {
                   position={[currentLocation.lat, currentLocation.lng]}
                   icon={busIcon}
                 />
+
                 <MapUpdater
                   center={[currentLocation.lat, currentLocation.lng]}
                   shouldUpdate={shouldCenterMap}
