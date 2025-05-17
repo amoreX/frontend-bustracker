@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Crosshair } from "lucide-react";
 import type { Trip } from "@/lib/types";
 import "leaflet/dist/leaflet.css";
-import L, { Icon } from "leaflet";
 import { busIcon } from "./busIcon";
 import { io, Socket } from "socket.io-client";
 import { TripInfoCard } from "./trip-info-card";
