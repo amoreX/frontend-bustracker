@@ -51,9 +51,9 @@ This is the frontend client for a real-time bus tracking system. It allows users
 
 🧵 Trip Creation Modal
 
-    A modal popup allows users to add new trips by entering the trip ID and coordinates.
+   - A modal popup allows users to add new trips by entering the trip ID and coordinates.
 
-    UI interactions are smooth and visually polished using ShadCN UI and Lucide icons.
+   - UI interactions are smooth and visually polished using ShadCN UI and Lucide icons.
 
 
 
