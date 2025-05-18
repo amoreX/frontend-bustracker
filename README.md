@@ -9,6 +9,8 @@ This is the frontend client for a real-time bus tracking system. It allows users
 
 ---
 
+## Visit https://github.com/amoreX/live-bus-tracker-lite-nihal/blob/main/README.md for setup instructions.
+
 ## 🚀 Tech Stack
 
 - **React**
