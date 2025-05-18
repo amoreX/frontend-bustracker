@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Bus, Plus, MapPin, Loader2 } from "lucide-react";
 import TripCard from "./trip-card";
+import { motion } from "framer-motion";
 import type { Trip } from "@/lib/types";
 import { fetchTrips, createTrip } from "@/lib/api";
 import CreateTripModal from "./craeteTrip";
+
 interface TripListProps {
   onSelectTrip: (trip: Trip) => void;
 }
+
 export default function TripList({ onSelectTrip }: TripListProps) {
   const [trips, setTrips] = useState<Trip[]>([]);
   const [loading, setLoading] = useState(true);
@@ -54,8 +57,30 @@ export default function TripList({ onSelectTrip }: TripListProps) {
         setOpen={setModalOpen}
         onCreate={handleCreateTrip}
       />
-      <div className="flex flex-col md:flex-row h-screen">
-        <div className="w-full md:w-1/3 lg:w-1/4 border-r border-gray-200 bg-white p-4 overflow-y-auto">
+
+      <motion.div
+        className="flex flex-col md:flex-row h-screen"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{
+          duration: 0.5,
+          type: "tween",
+          ease: "easeInOut",
+          delay: 0.1,
+        }}
+      >
+        {/* Left Sidebar */}
+        <motion.div
+          initial={{ x: -500, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{
+            duration: 0.4,
+            type: "tween",
+            ease: "easeInOut",
+            delay: 0.7,
+          }}
+          className="w-full md:w-1/3 lg:w-1/4 border-r border-gray-200 bg-white p-4 overflow-y-auto"
+        >
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold">Trip List</h1>
             <Button onClick={() => setModalOpen(true)} disabled={creating}>
@@ -83,20 +108,53 @@ export default function TripList({ onSelectTrip }: TripListProps) {
               <p className="text-sm mt-2">Create a new trip to get started</p>
             </div>
           ) : (
-            <div className="space-y-3">
+            <motion.div
+              className="space-y-3"
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.1,
+                  },
+                },
+              }}
+            >
               {trips.map((trip) => (
-                <TripCard
+                <motion.div
                   key={trip.id}
-                  trip={trip}
-                  onSelectTrip={onSelectTrip}
-                />
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    show: { opacity: 1, y: 0 },
+                  }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  <TripCard trip={trip} onSelectTrip={onSelectTrip} />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
 
-        <div className="hidden md:flex md:w-2/3 lg:w-3/4 bg-gray-100 items-center justify-center">
-          <div className="text-center max-w-md p-8">
+        {/* Right Panel */}
+        <motion.div
+          className="hidden md:flex md:w-2/3 lg:w-3/4 bg-gray-100 items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
+          <motion.div
+            className="text-center max-w-md p-8"
+            initial={{ opacity: 0, scale: 0.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.5,
+              type: "tween",
+              ease: "easeInOut",
+              delay: 0.8,
+            }}
+          >
             <MapPin className="h-16 w-16 mx-auto mb-4 text-gray-300" />
             <h2 className="text-2xl font-semibold mb-2">
               Select a Trip to Track
@@ -105,9 +163,9 @@ export default function TripList({ onSelectTrip }: TripListProps) {
               Choose a trip from the list to view its real-time location on the
               map.
             </p>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </>
   );
 }

@@ -26,6 +26,5 @@ export default function App() {
         <TripList onSelectTrip={handleSelectTrip} />
       )}
     </main>
-    // <div className="text-red-700">yooo</div>
   );
 }
